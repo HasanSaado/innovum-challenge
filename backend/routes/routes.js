@@ -85,7 +85,7 @@ router.put(`/book/:id`, async (request, response) => {
     _id: bookId,
   });
 
-  Book.findOneAndUpdate(query, { isReserved: true })
+  Book.findOneAndUpdate(query, { isReserved: request.body.isReserved })
     .then(data => {
       response.json({ status: 'ok' });
     })

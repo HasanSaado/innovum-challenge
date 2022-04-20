@@ -51,30 +51,9 @@ function RegisterPage() {
 		const data = await response.json()
 
 		if (data.status === 'ok') {
-			history.push('/')
+			history('/')
 		}
   }
-
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-
-  //   let result = await customersApi.customerRegister({
-  //     name: name,
-  //     email: email,
-  //     password: password,
-  //     password_confirmation: passwordConfirmation
-  //   });
-
-  //   if ('User created successfully' === result.message) {
-  //     setEmail('');
-  //     setName('');
-  //     setPassword('');
-  //     setPasswordConfirmation('');
-  //     alert('User created successfully');
-  //   } else {
-  //     alert('Error');
-  //   }
-  // }
 
   /**
    *

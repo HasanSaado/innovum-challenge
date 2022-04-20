@@ -44,14 +44,14 @@ function LibraryPage() {
   /**
    * 
    */
-  async function handleReservePress(id) {
+  async function handleReservePress(id, reserved) {
     const response = await fetch(`http://localhost:4000/api/book/${id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				isReserved: true
+				isReserved: !reserved
 			})
 		})
     .then(response => {
@@ -60,6 +60,8 @@ function LibraryPage() {
     })
   }
 
+  console.log(books);
+
   const columns = [
     { field: 'title', headerName: 'Title', width: 200 },
     { field: 'author', headerName: 'Author', width: 200 },
@@ -67,8 +69,9 @@ function LibraryPage() {
     { field: 'genre', headerName: 'Genre', width: 200 },
     {
       field: 'isReserved', headerName: 'Reserve Book', width: 200, renderCell: (params) => (
-        !params.row.isReserved &&
-        <i className="fa-solid fa-book" onClick={() => handleReservePress(params.row._id)}></i>
+        !params.row.isReserved ?
+        <i className="fa-solid fa-book" onClick={() => handleReservePress(params.row._id, params.row.isReserved)}></i> :
+        <i className="fa-solid fa-rotate-left" onClick={() => handleReservePress(params.row._id, params.row.isReserved)}></i>
       )
     },
   ];
